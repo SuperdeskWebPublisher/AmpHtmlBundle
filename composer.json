@@ -1,5 +1,5 @@
 {
-    "name": "takeit/amp-html-bundle",
+    "name": "superdeskwebpublisher/amp-html-bundle",
     "type": "symfony-bundle",
     "description": "Provide AMP HTML conversion to your Symfony2/Symfony3 projects.",
     "keywords": ["amphtml", "amp-html", "amp", "google", "html"],
@@ -36,7 +36,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.x-dev"
+            "master": "2.x-dev"
         }
     }
 }
