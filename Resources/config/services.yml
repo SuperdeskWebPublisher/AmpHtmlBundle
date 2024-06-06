@@ -1,0 +1,32 @@
+services:
+    takeit_amp_html.amp_controller:
+        class: Takeit\Bundle\AmpHtmlBundle\Controller\AmpViewController
+        arguments: ['@twig', '@takeit_amp_html.amp_converter', '@takeit_amp_html.loader.theme']
+        public: true
+
+    takeit_amp_html.param_converter.resolve_entity_converter:
+        class: Takeit\Bundle\AmpHtmlBundle\Request\ParamConverter\ResolveEntityParamConverter
+        public: false
+        tags:
+            - { name: request.param_converter, priority: 10, converter: doctrine.orm }
+        arguments:
+            - {'Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface': "%takeit_amp_html.configuration.model.class%"}
+            - '@?doctrine'
+
+    takeit_amp_html.checker.default:
+      class: Takeit\Bundle\AmpHtmlBundle\Checker\AmpSupportChecker
+      public: false
+
+    takeit_amp_html.twig_extension:
+        class: Takeit\Bundle\AmpHtmlBundle\Twig\AmpExtension
+        public: false
+        arguments:
+            - '@takeit_amp_html.amp_url_generator'
+        tags:
+            - { name: twig.extension }
+
+    takeit_amp_html.loader.theme.default:
+        class: Takeit\Bundle\AmpHtmlBundle\Loader\ThemeLoader
+        arguments:
+            - '@twig.loader.filesystem'
+            - '%takeit_amp_html.configuration.theme.theme_path%'
